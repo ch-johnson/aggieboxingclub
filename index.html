@@ -1,139 +1,432 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Aggie Boxing Club</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aggie Boxing Club | High Performance</title>
+    <meta name="facebook-domain-verification" content="mt0syo69im668r8uu6ybideyx4f5bt" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <meta name="facebook-domain-verification" content="mt0syo69im668r8uu6ybideyx4f5bt" />
+    <!-- Google Fonts for Bold, Athletic Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --aggie-maroon: #500000;
+            --aggie-white: #ffffff;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --text-muted: #a0a0a0;
+            --font-display: 'Oswald', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html {
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--aggie-white);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6, .display-font {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        /* Navbar Customization */
+        .navbar-dark {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 2px solid var(--aggie-maroon);
+        }
+        .navbar-brand {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--aggie-white) !important;
+        }
+        .nav-link {
+            font-weight: 600;
+            color: var(--aggie-white) !important;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--aggie-maroon) !important;
+        }
+
+        /* Buttons */
+        .btn-aggie {
+            background-color: var(--aggie-maroon);
+            color: var(--aggie-white);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border: 2px solid var(--aggie-maroon);
+            border-radius: 0;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(80, 0, 0, 0.4);
+        }
+        .btn-aggie:hover {
+            background-color: transparent;
+            color: var(--aggie-maroon);
+            box-shadow: 0 6px 20px rgba(80, 0, 0, 0.6);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)), url('https://placehold.co/1920x1080/222222/500000?text=Boxing+Ring+Action+Shot') no-repeat center center/cover;
+        }
+        .hero-content {
+            z-index: 2;
+        }
+        .hero h1 {
+            font-size: 5rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+        }
+
+        /* Manifesto Section */
+        .manifesto {
+            padding: 100px 0;
+            background-color: var(--darker-bg);
+            text-align: center;
+        }
+        .manifesto-title {
+            color: var(--aggie-maroon);
+            margin-bottom: 50px;
+            font-size: 3rem;
+        }
+        .manifesto-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .manifesto-value.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Program Sections */
+        .programs {
+            padding: 80px 0;
+        }
+        .program-block {
+            margin-bottom: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .program-block:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .program-img-container {
+            flex: 1 1 50%;
+            min-width: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        .program-img {
+            width: 100%;
+            height: auto;
+            /* Monochromatic/Dark-toned filter for consistency */
+            filter: grayscale(80%) contrast(1.2) brightness(0.7);
+            transition: filter 0.5s ease, transform 0.5s ease;
+        }
+        .program-block:hover .program-img {
+            filter: grayscale(20%) contrast(1.1) brightness(0.9);
+            transform: scale(1.02);
+        }
+        .program-content {
+            flex: 1 1 50%;
+            min-width: 300px;
+            padding: 40px;
+        }
+        .program-title {
+            font-size: 2.5rem;
+            color: var(--aggie-white);
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--aggie-maroon);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .program-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* Engagement/CTA Section */
+        .engagement {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, #1a0000 100%);
+            border-top: 4px solid var(--aggie-maroon);
+        }
+        .engagement-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .engagement-title {
+            font-size: 3.5rem;
+            color: var(--aggie-white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .involvement-card {
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333;
+            padding: 30px;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .involvement-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--aggie-maroon);
+        }
+        .involvement-icon {
+            font-size: 3rem;
+            color: var(--aggie-maroon);
+            margin-bottom: 20px;
+        }
+        .involvement-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .involvement-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--darker-bg);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .program-img-container, .program-content { flex: 1 1 100%; }
+            .program-block:nth-child(even) { flex-direction: column; }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- <header>
-        <iframe src="header.html" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
-    </header> -->
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
-                <img src="https://objects.aggieboxing.com/AggieBoxingSocials-Transparent.png" alt="Logo" width="30" height="30"
-                    class="d-inline-block align-text-top">
-                Aggie Boxing Club
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <img src="https://objects.aggieboxing.com/AggieBoxingSocials-Transparent.png" alt="Aggie Boxing Club Logo" width="40" height="40" class="d-inline-block align-text-middle me-2">
+                AGGIE BOXING CLUB
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" href="#home">HOME</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#manifesto">MANIFESTO</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="#programs">PROGRAMS</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link btn btn-aggie text-white px-4 py-2" href="#get-involved">GET INVOLVED</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Image Carousel -->
-    <!-- Add images in the ./resources/images/ directory and duplicate the lines below following the same format -->
-    <!-- The number of carousel-indicators should match the number of carousel items  -->
-    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true"
-                aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6" aria-label="Slide 7"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="7" aria-label="Slide 8"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="8" aria-label="Slide 9"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="9" aria-label="Slide 10"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="10" aria-label="Slide 11"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="11" aria-label="Slide 12"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="12" aria-label="Slide 13"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="13" aria-label="Slide 14"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="14" aria-label="Slide 15"></button>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>AGGIE BOXING CLUB</h1>
+            <p>HIGH PERFORMANCE. UNYIELDING DISCIPLINE. TEXAS A&M UNIVERSITY.</p>
+            <a href="#get-involved" class="btn btn-aggie">JOIN THE FIGHT</a>
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="resources/images/FFN24-01.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-02.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-03.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-04.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-05.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-06.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-07.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-08.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-09.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-10.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-11.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-12.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-13.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-14.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="resources/images/FFN24-15.jpg" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+    </section>
 
-    <!-- <footer>
-        <iframe src="footer.html" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
-    </footer> -->
+    <!-- Manifesto Section -->
+    <section id="manifesto" class="manifesto">
+        <div class="container">
+            <h2 class="manifesto-title">OUR MANIFESTO</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="manifesto-value">HONOR IN THE FIGHT.</div>
+                    <div class="manifesto-value" style="transition-delay: 0.2s;">TENACITY IN THE FACE OF HARDSHIP.</div>
+                    <div class="manifesto-value" style="transition-delay: 0.4s; color: var(--aggie-maroon);">VIRTUE AS AN ULTIMATUM.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="programs container">
+
+        <!-- Block 1 -->
+        <div class="program-block row g-0">
+            <div class="col-md-6 program-img-container">
+                <!-- Placeholder image for University Boxing -->
+                <img src="https://placehold.co/800x600/111111/500000?text=University+Boxing+Training+Shot" alt="Placeholder image depicting students engaged in rigorous boxing training at the university gym, highlighting discipline and inclusion." class="program-img img-fluid">
+            </div>
+            <div class="col-md-6 program-content">
+                <h3 class="program-title">UNIVERSITY BOXING</h3>
+                <p class="program-desc">
+                    Forged in the heart of Texas A&M, our University Boxing program focuses on raw training, student inclusion, and the relentless development of discipline. Whether you are stepping into the ring for the first time or honing years of experience, we provide the crucible to build mental and physical fortitude.
+                </p>
+            </div>
+        </div>
+
+        <!-- Block 2 -->
+        <div class="program-block row g-0">
+            <div class="col-md-6 program-img-container">
+                <!-- Placeholder image for Farmer's Fight Night -->
+                <img src="https://placehold.co/800x600/111111/500000?text=Farmers+Fight+Night+Event" alt="Placeholder image showing a large, energetic crowd surrounding a brightly lit boxing ring during the Farmer's Fight Night charity event." class="program-img img-fluid">
+            </div>
+            <div class="col-md-6 program-content">
+                <h3 class="program-title">FARMER'S FIGHT NIGHT</h3>
+                <p class="program-desc">
+                    More than a competition; it is a commitment to our community. Farmer's Fight Night is our premier charity exhibition, bringing together the Aggie spirit for a night of intense matchups and profound impact. Witness the dedication of our fighters as they battle for a cause greater than themselves.
+                </p>
+            </div>
+        </div>
+
+        <!-- Block 3 -->
+        <div class="program-block row g-0">
+            <div class="col-md-6 program-img-container">
+                <!-- Placeholder image for National Champions -->
+                <img src="https://placehold.co/800x600/111111/500000?text=USIBA+National+Champions+Team" alt="Placeholder image of the USIBA team posing confidently with championship belts, emphasizing high performance and winning." class="program-img img-fluid">
+            </div>
+            <div class="col-md-6 program-content">
+                <h3 class="program-title">NATIONAL CHAMPIONS</h3>
+                <p class="program-desc">
+                    Excellence is not an aspiration; it is our standard. Our USIBA team represents the pinnacle of collegiate boxing. We emphasize elite performance, competitive rigor, and a winning mindset, consistently proving our dominance on the national stage.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Engagement / CTA Section -->
+    <section id="get-involved" class="engagement">
+        <div class="container">
+            <div class="engagement-header">
+                <h2 class="engagement-title">STEP INTO THE RING</h2>
+                <p class="text-muted mt-3 fs-5">There are multiple ways to be part of the legacy. Choose your path.</p>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <!-- Prospective Members -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="involvement-card">
+                        <div class="involvement-icon">🥊</div>
+                        <h4 class="involvement-title display-font">JOIN THE TEAM</h4>
+                        <p class="involvement-desc">Train, compete, and forge unbreakable discipline as a member of the Aggie Boxing Club.</p>
+                    </div>
+                </div>
+                <!-- Attendees -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="involvement-card">
+                        <div class="involvement-icon">🎟️</div>
+                        <h4 class="involvement-title display-font">ATTEND EVENTS</h4>
+                        <p class="involvement-desc">Experience the raw energy of Farmer's Fight Night and cheer on our national champions.</p>
+                    </div>
+                </div>
+                <!-- Volunteers -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="involvement-card">
+                        <div class="involvement-icon">🤝</div>
+                        <h4 class="involvement-title display-font">VOLUNTEER</h4>
+                        <p class="involvement-desc">Support the operations, event management, and community outreach that drive our club.</p>
+                    </div>
+                </div>
+                <!-- Sponsors -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="involvement-card">
+                        <div class="involvement-icon">⭐</div>
+                        <h4 class="involvement-title display-font">SPONSOR</h4>
+                        <p class="involvement-desc">Partner with a legacy of high performance and help fund the future of collegiate boxing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-aggie btn-lg px-5 py-3">OFFICIAL GET INVOLVED FORM</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <img src="https://objects.aggieboxing.com/AggieBoxingSocials-Transparent.png" alt="Aggie Boxing Club Logo" width="50" class="mb-3 opacity-75">
+            <p class="mb-0 text-muted">&copy; <span id="year"></span> Aggie Boxing Club. Texas A&M University.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Simple Animations Script -->
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Intersection Observer for Manifesto Animations
+        document.addEventListener("DOMContentLoaded", function() {
+            const manifestoValues = document.querySelectorAll('.manifesto-value');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            manifestoValues.forEach(value => {
+                observer.observe(value);
+            });
+        });
+    </script>
 </body>
-
 </html>
