@@ -45,7 +45,7 @@ Since the subpages rely on `iframe` onload events to inject components, you must
 
 1. **Start a local server**:
    - Using Python: `python3 -m http.server 8000`
-   - Using Node (http-server): `npx http-server`
+
 2. **Access the site**: Navigate to `http://localhost:8000` in your web browser.
 
 ## Contributing
